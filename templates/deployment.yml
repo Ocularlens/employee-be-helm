@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: employee-be
-  namespace: backend
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
   labels:
-    app: employee-be
+    app: {{ .Values.appName }}
 spec:
   selector:
     matchLabels:
-      app: employee-be
+      app: {{ .Values.appName }}
   template:
     metadata:
       labels:
-        app: employee-be
+        app: {{ .Values.appName }}
     spec:
       containers:
-        - name: employee-be
-          image: devops/employee-be:1.0.9
-          imagePullPolicy: IfNotPresent
+        - name: {{ .Values.appName }}
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: instance-port
-              containerPort: 3000
+            - name: http
+              containerPort: {{ .Values.appPort }}
           envFrom:
             - configMapRef:
-                name: employee-be-config
+                name: {{ .Values.appName }}-config

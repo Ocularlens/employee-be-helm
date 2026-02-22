@@ -1,0 +1,19 @@
+appName: employee-backend
+appPort: 3000
+namespace: backend
+
+image:
+  name: devops/employee-be
+  tag: 1.0.9
+  pullPolicy: IfNotPresent
+
+configMap:
+  DB_HOST: "mysql-service.backend.svc.cluster.local"
+  DB_PORT: "3306"
+  DB_PASSWORD: "1234"
+  DB_USER: "root"
+  DB_NAME: "lebanjames"
+  JWT_SECRET: "QWERTYUIOPASDFGHJKLZXCVBNM123456"
+  TOKEN_EXPIRATION: "1h"
+  FE_APP_URL: "*"
+  TEMP_DIR: /var/lib/employee-be/tmp
